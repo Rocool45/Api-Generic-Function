@@ -24,6 +24,7 @@ const MakeApiCall=(methodName,apiUrl,masgbody)=>{
 
     xhr.onload =function (){
         if(xhr.status >= 200 && xhr.status <= 299){
+            snkbar("Post Fatched Successfuly","success")
             let data = JSON.parse(xhr.response)
         if(methodName === "GET" && Array.isArray(data)){
             templating(data)
