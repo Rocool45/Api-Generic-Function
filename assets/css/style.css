@@ -1,0 +1,57 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: #ffffff; 
+}
+
+.card-header {
+  background: #4a90e2;
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px 12px 0 0;
+}
+
+.card-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.card-body {
+  padding: 15px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.card-footer {
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 12px 12px;
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+  color: white;
+}
+
+.btn-danger {
+  background: #dc3545;
+  border: none;
+  color: white;
+}
+form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
