@@ -12,7 +12,7 @@ const snkbar= (masg,icon)=>{
     swal.fire({
         title:masg,
         icon:icon,
-        timer:2000
+        timer:3000
     })
 }
 const Base_url ="https://jsonplaceholder.typicode.com"
@@ -24,16 +24,16 @@ const MakeApiCall=(methodName,apiUrl,masgbody)=>{
 
     xhr.onload =function (){
         if(xhr.status >= 200 && xhr.status <= 299){
-            snkbar("Post Fatched Successfuly","success")
             let data = JSON.parse(xhr.response)
         if(methodName === "GET" && Array.isArray(data)){
             templating(data)
+             snkbar("Post Fatched Successfuly","success")
         }else if(methodName === "GET"){
             PatchData(data)
         }else if(methodName === "POST"){
             createcard({...masgbody,id:data.id})
             postForm.reset()
-             snkbar("Post Added Successfuly",'success')
+          snkbar("Post Added Successfuly",'success')
         }
         else if(methodName === "PATCH"){
 
@@ -47,12 +47,19 @@ const MakeApiCall=(methodName,apiUrl,masgbody)=>{
 
            submitpost.classList.remove("d-none")
            updatepot.classList.add("d-none")
+           snkbar("Post is Updated","success")
         }else if(methodName === "DELETE"){
            let R_id = localStorage.getItem("Remove_id")
            let card = document.getElementById(R_id).parentElement
            card.remove()
-
-        }
+            snkbar("Your Post is Removed!!!","success")
+             postForm.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+        }else(err=>{
+            snkbar("Network Issue","error")
+        })
     }
 }
 
@@ -127,6 +134,12 @@ const onEdit =(ele)=>{
     let Edit_id = ele.closest(".card").id;
     let Edit_Url = `${Base_url}/posts/${Edit_id}`;
     localStorage.setItem("Edit_id",Edit_id)
+
+postForm.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
     MakeApiCall("GET",Edit_Url,null)
 }
 
@@ -142,7 +155,20 @@ const onUpdate =(ele)=>{
          id:Update_id
     }
     MakeApiCall("PATCH",Update_url,Update_obj)
-}
+
+    // document.getElementById(Update_id).scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "center"
+    // });
+
+     let updatedCard = document.getElementById(Update_id);
+    if(updatedCard){
+        updatedCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    
+}}
 
 const onRemove=(ele)=>{
 
@@ -159,8 +185,9 @@ const onRemove=(ele)=>{
    let Remove_id = ele.closest(".card").id
     let Remove_url = `${Base_url}/posts/${Remove_id}`
         localStorage.setItem("Remove_id",Remove_id)
+        
     MakeApiCall("DELETE",Remove_url,null)
-    snkbar("Removed Successfuly",'success')
+      
   }
 });
 
